@@ -5,7 +5,9 @@ import auth.auth.repository.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+
 import org.springframework.security.crypto.password.PasswordEncoder;
+
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,6 +16,7 @@ import java.util.List;
 @RequestMapping("/users")
 @RestController
 @CrossOrigin(origins = "http://localhost:3000/")
+
 public class UserController {
     public final UserRepository repo;
     private final PasswordEncoder passwordEncoder;
