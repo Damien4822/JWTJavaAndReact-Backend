@@ -43,11 +43,11 @@ public class JwtService {
         return Jwts
                 .builder()
                 .setClaims(extraClaims)
-                .setIssuer(userDetails.getAuthorities().toString())
+                //.setIssuer(userDetails.getAuthorities().toString())
                 //.claim("role", userDetails.getAuthorities().toString())
                 .setSubject(userDetails.getUsername())
                 .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + 10 * 1000))
+                .setExpiration(new Date(System.currentTimeMillis() + 20*1000))
                 .signWith(getSignInKey(), SignatureAlgorithm.HS256)
                 .compact();
     }

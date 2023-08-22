@@ -27,7 +27,9 @@ public class AuthenticationService {
 
         User user = new User();
         user.setUsername(request.getUsername());
+        //turn of password encoder for testing
         user.setPassword(passwordEncoder.encode(request.getPassword()));
+        //user.setPassword(request.getPassword());
         user.setRole(Role.USER);
         repo.save(user);
         var jwtToken = jwtService.generateToken(user);

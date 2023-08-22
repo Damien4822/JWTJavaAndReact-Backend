@@ -1,5 +1,6 @@
 package auth.auth.controller;
 
+import auth.auth.model.Role;
 import auth.auth.model.User;
 import auth.auth.repository.UserRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -44,13 +45,15 @@ public class UserController {
         User update = repo.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("user not found"));
         update.setUsername(user.getUsername());
-        if(update.getPassword().equals(user.getPassword()))//same encoded password
-        {
-            update.setPassword(user.getPassword());
-        }
-        else {
-            update.setPassword(passwordEncoder.encode(user.getPassword()));
-        }
+        //turn of password encoder for testing
+        //if(update.getPassword().equals(user.getPassword()))//same encoded password
+        //{
+            //update.setPassword(user.getPassword());
+        //}
+        //else {
+        update.setPassword(passwordEncoder.encode(user.getPassword()));
+        //}
+        //update.setPassword(user.getPassword());
         repo.save(update);
         return ResponseEntity.ok(update);
     }
@@ -59,7 +62,10 @@ public class UserController {
     public ResponseEntity<?> delete(@PathVariable int id) {
         User delete = repo.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("user not found"));
+        if(delete.getRole()!= Role.ADMIN)
+        {
         repo.delete(delete);
+        }
         return ResponseEntity.noContent().build();
     }
 }
