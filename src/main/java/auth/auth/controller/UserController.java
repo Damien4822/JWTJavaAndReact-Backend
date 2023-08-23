@@ -45,7 +45,6 @@ public class UserController {
         User update = repo.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("user not found"));
         update.setUsername(user.getUsername());
-        //turn of password encoder for testing
         //if(update.getPassword().equals(user.getPassword()))//same encoded password
         //{
             //update.setPassword(user.getPassword());
