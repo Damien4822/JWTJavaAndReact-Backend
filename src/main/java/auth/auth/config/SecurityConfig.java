@@ -28,7 +28,7 @@ public class SecurityConfig {
                 .cors(cors -> cors.disable())
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/v1/auth/**").permitAll()
-                        .requestMatchers("/users/**").permitAll()
+                        .requestMatchers("/users/**").hasAuthority("ADMIN")
                         //.hasAuthority("ADMIN")
                         //.requestMatchers("/users/**").hasAuthority("ADMIN")
                         .anyRequest().authenticated()
