@@ -17,7 +17,6 @@ import java.util.List;
 @RequestMapping("/users")
 @RestController
 @CrossOrigin(origins = "http://localhost:3000/")
-
 public class UserController {
     public final UserRepository repo;
     private final PasswordEncoder passwordEncoder;
@@ -61,10 +60,7 @@ public class UserController {
     public ResponseEntity<?> delete(@PathVariable int id) {
         User delete = repo.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("user not found"));
-        if(delete.getRole()!= Role.ADMIN)
-        {
         repo.delete(delete);
-        }
         return ResponseEntity.noContent().build();
     }
 }
