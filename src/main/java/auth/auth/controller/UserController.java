@@ -60,7 +60,11 @@ public class UserController {
     public ResponseEntity<?> delete(@PathVariable int id) {
         User delete = repo.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("user not found"));
-        repo.delete(delete);
-        return ResponseEntity.noContent().build();
+        if (delete.getRole()!=Role.ADMIN) {
+            repo.delete(delete);
+            return ResponseEntity.badRequest().build();
+        }
+        else
+            return ResponseEntity.noContent().build();
     }
 }
